@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    environment{ 
+        myVar = "Outer Block"
+    }
+    stages{
+        stage('checkout'){
+            steps{
+            git branch: 'main', credentialsId: 'sravyagithubid', url: 'https://github.com/sravyanka/Devops.git'
+        }
+        }
+        stage('Build'){
+            steps{
+            sh "sh test.sh"
+        }
+        }
+        stage('Post Tasks'){
+            steps{
+            sh "echo Emailing"
+            }
+        }
+        stage('Printing Environment var'){
+            environment{
+                myVar = "Inner Block"
+            }
+            steps{
+                sh'echo "This is my variable: $myVar"'
+            }
+        }
+
+    }
+}
