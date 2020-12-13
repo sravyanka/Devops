@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-            git branch: 'main', credentialsId: 'sravyagithubid', url: 'https://github.com/sravyanka/Devops.git'
+            checkout scm
         }
         }
         stage('Build'){
